@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoticare - Emotional Wellness Hub</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&family=Poppins:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sunset-1: #2c1b5f;
+            --sunset-2: #ff7e67;
+            --sunset-3: #f6b07a;
+            --paper: #CBB089;
+            --card: #B59D78;
+            --dark: #2F241A;
+            --muted: #6b5746;
+            --accent: #FFD166;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
+            --radius: 12px;
+            --container: 1100px;
+            
+            /* Mood colors */
+            --amazing: #FFD166;
+            --good: #F6C48B;
+            --ok: #E6D8A6;
+            --bad: #F08A8A;
+            --awful: #C1413D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--sunset-1), var(--sunset-2), var(--sunset-3));
+            color: var(--dark);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 24px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.1" /></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Header styles */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            position: absolute;
+            left: 0;
+            width: 72px;
+            height: 72px;
+            background: var(--paper);
+            border: 2px solid var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: 'EC';
+            font-family: 'Montserrat Alternates', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        h1 {
+            font-family: 'Montserrat Alternates', sans-serif;
+            font-size: 64px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--dark);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .tagline {
+            font-style: italic;
+            font-size: 18px;
+            text-align: center;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        /* Content panel */
+        .content-panel {
+            background-color: var(--paper);
+            border: 2px solid rgba(47, 36, 26, 0.95);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            min-height: 480px;
+        }
+
+        .content-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05" /></svg>');
+            pointer-events: none;
+            border-radius: var(--radius);
+        }
+
+        /* Navigation cards */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .nav-card {
+            background-color: var(--card);
+            border: 2px solid rgba(47, 36, 26, 0.95);
+            border-radius: var(--radius);
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-card i {
+            font-size: 64px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-card span {
+            font-weight: 600;
+            font-size: 20px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section headings */
+        .section-heading {
+            font-family: 'Montserrat Alternates', sans-serif;
+            font-size: 34px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-heading::before,
+        .section-heading::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background-color: var(--dark);
+            margin: 0 20px;
+        }
+
+        /* Mood selector */
+        .mood-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .mood-option {
+            background-color: var(--card);
+            border: 2px solid rgba(47, 36, 26, 0.95);
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.16s ease;
+            position: relative;
+            top: 0;
+        }
+
+        .mood-option:hover {
+            top: -4px;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .mood-option.active {
+            background-color: var(--dark);
+            color: var(--paper);
+        }
+
+        /* Player controls */
+        .player {
+            background-color: var(--card);
+            border: 2px solid rgba(47, 36, 26, 0.95);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-top: 40px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: rgba(47, 36, 26, 0.2);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background-color: var(--dark);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--dark);
+            color: var(--paper);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Playlist styles */
+        .playlist {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: rgba(47, 36, 26, 0.05);
+            border-radius: var(--radius);
+            padding: 10px;
+        }
+
+        .playlist-item {
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .playlist-item:hover {
+            background-color: rgba(47, 36, 26, 0.1);
+        }
+
+        .playlist-item.active {
+            background-color: var(--dark);
+            color: var(--paper);
+        }
+
+        .playlist-item-duration {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .playlist-item.active .playlist-item-duration {
+            color: var(--paper);
+        }
+
+        /* Quote bubble */
+        .quote-container {
+            background-color: white;
+            border: 3px solid var(--dark);
+            border-radius: 18px;
+            padding: 40px;
+            margin: 0 auto 40px;
+            max-width: 80%;
+            position: relative;
+            box-shadow: var(--shadow);
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quote {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .author {
+            text-align: right;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .quote-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background-color: var(--paper);
+            border: 2px solid var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Breathing techniques */
+        .technique-levels {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .level {
+            width: 240px;
+            height: 240px;
+            background-color: var(--card);
+            border: 2px solid rgba(47, 36, 26, 0.95);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .level:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .level.active {
+            animation: pulse 2s infinite;
+            background-color: var(--dark);
+            color: var(--paper);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+
+        .level i {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .level h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .breathing-animation {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 1s ease;
+            background: linear-gradient(135deg, var(--sunset-1), var(--sunset-2));
+        }
+
+        /* Mood tracking */
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .mood-emoji {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mood-emoji:hover {
+            transform: scale(1.1);
+        }
+
+        .mood-emoji div {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin-bottom: 8px;
+            background-color: var(--card);
+            border: 2px solid var(--dark);
+        }
+
+        .mood-emoji.active div {
+            background-color: var(--dark);
+            transform: scale(1.1);
+        }
+
+        /* Calendar styles */
+        .calendar-container {
+            margin-top: 20px;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            border: 2px solid rgba(47, 36, 26, 0.95);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 12px;
+        }
+
+        .calendar-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--dark);
+            color: var(--paper);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--paper);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar th {
+            background-color: var(--dark);
+            color: var(--paper);
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .calendar td {
+            border: 1px solid rgba(47, 36, 26, 0.3);
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            height: 50px;
+            width: 50px;
+        }
+
+        .calendar td:hover {
+            background-color: rgba(47, 36, 26, 0.1);
+        }
+
+        .calendar td.has-mood::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .calendar td.mood-amazing::after { background-color: var(--amazing); }
+        .calendar td.mood-good::after { background-color: var(--good); }
+        .calendar td.mood-ok::after { background-color: var(--ok); }
+        .calendar td.mood-bad::after { background-color: var(--bad); }
+        .calendar td.mood-awful::after { background-color: var(--awful); }
+
+        /* Utility classes */
+        .hidden {
+            display: none;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-card {
+                height: 180px;
+            }
+            
+            .section-heading {
+                font-size: 24px;
+            }
+            
+            .quote {
+                font-size: 18px;
+            }
+            
+            .technique-levels {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .level {
+                width: 100%;
+                max-width: 280px;
+                height: 120px;
+                flex-direction: row;
+                gap: 16px;
+            }
+            
+            .calendar {
+                font-size: 12px;
+            }
+            
+            .calendar td {
+                padding: 8px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo" id="home-button">
+                <i class="fas fa-home" style="font-size: 24px;"></i>
+            </div>
+            <div>
+                <h1>EMOTICARE</h1>
+                <p class="tagline">SIMPLE TOOLS TO CALM YOUR MIND, ANYTIME, ANYWHERE</p>
+            </div>
+        </header>
+
+        <main>
+            <!-- Home Page -->
+            <div class="content-panel" id="home-page">
+                <div class="nav-grid">
+                    <div class="nav-card" data-page="music">
+                        <i class="fas fa-music"></i>
+                        <span>Music Playlist</span>
+                    </div>
+                    <div class="nav-card" data-page="quotes">
+                        <i class="fas fa-quote-left"></i>
+                        <span>Daily Quotes</span>
+                    </div>
+                    <div class="nav-card" data-page="mood">
+                        <i class="fas fa-smile"></i>
+                        <span>Mood Tracking</span>
+                    </div>
+                    <div class="nav-card" data-page="breathing">
+                        <i class="fas fa-wind"></i>
+                        <span>Breathing Techniques</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music Playlist Page -->
+            <div class="content-panel hidden" id="music-page">
+                <h2 class="section-heading">MUSIC <span style="font-family: cursive; font-size: 28px; margin: 0 8px;">playlist</span></h2>
+                
+                <div class="mood-selector">
+                    <div class="mood-option active" data-mood="happy">HAPPY</div>
+                    <div class="mood-option" data-mood="angry">ANGRY</div>
+                    <div class="mood-option" data-mood="sad">SAD</div>
+                    <div class="mood-option" data-mood="relaxing">RELAXING</div>
+                    <div class="mood-option" data-mood="romantic">ROMANTIC</div>
+                </div>
+                
+                <div class="player">
+                    <h3 id="now-playing">Select a mood to play music</h3>
+                    <div class="progress-bar" id="progress-bar">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    <div class="time-display">
+                        <span id="current-time">0:00</span> / <span id="total-time">0:00</span>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button class="control-btn" id="shuffle">
+                            <i class="fas fa-random"></i>
+                        </button>
+                        <button class="control-btn" id="prev">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="control-btn" id="play-pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn" id="next">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                        <button class="control-btn" id="repeat">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+
+                    <div class="playlist" id="playlist">
+                        <!-- Playlist will be populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Quote Page -->
+            <div class="content-panel hidden" id="quotes-page">
+                <h2 class="section-heading">DAILY QUOTE</h2>
+                
+                <div class="quote-container">
+                    <p class="quote" id="quote-text">"The greatest glory in living lies not in never falling, but in rising every time we fall."</p>
+                    <p class="author" id="quote-author">- Nelson Mandela</p>
+                </div>
+                
+                <div class="quote-nav">
+                    <div class="nav-btn" id="prev-quote">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <div class="nav-btn" id="next-quote">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breathing Techniques Page -->
+            <div class="content-panel hidden" id="breathing-page">
+                <h2 class="section-heading">BREATHING TECHNIQUE</h2>
+                
+                <div class="technique-levels">
+                    <div class="level active" data-level="basic">
+                        <i class="fas fa-feather-alt"></i>
+                        <h3>Basic</h3>
+                        <p>4-4-4 Pattern</p>
+                    </div>
+                    <div class="level" data-level="moderate">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Moderate</h3>
+                        <p>4-7-8 Pattern</p>
+                    </div>
+                    <div class="level" data-level="advanced">
+                        <i class="fas fa-fire"></i>
+                        <h3>Advanced</h3>
+                        <p>Box Breathing</p>
+                    </div>
+                </div>
+                
+                <div class="breathing-animation" id="breathing-circle">
+                    Breathe In
+                </div>
+                
+                <div class="text-center">
+                    <div class="player-controls" style="justify-content: center;">
+                        <button class="control-btn" id="breath-control" style="width: 64px; height: 64px;">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                    
+                    <p id="breath-instruction" style="margin-top: 20px; font-weight: 500;">Inhale 4s - Hold 4s - Exhale 4s</p>
+                </div>
+            </div>
+
+            <!-- Mood Tracking Page -->
+            <div class="content-panel hidden" id="mood-page">
+                <h2 class="section-heading">HOW ARE YOU?</h2>
+                
+                <div class="emoji-row">
+                    <div class="mood-emoji" data-mood="amazing">
+                        <div>🤩</div>
+                        <span>AMAZING</span>
+                    </div>
+                    <div class="mood-emoji" data-mood="good">
+                        <div>😊</div>
+                        <span>GOOD</span>
+                    </div>
+                    <div class="mood-emoji" data-mood="ok">
+                        <div>😐</div>
+                        <span>OK</span>
+                    </div>
+                    <div class="mood-emoji" data-mood="bad">
+                        <div>😔</div>
+                        <span>BAD</span>
+                    </div>
+                    <div class="mood-emoji" data-mood="awful">
+                        <div>😢</div>
+                        <span>AWFUL</span>
+                    </div>
+                </div>
+                
+                <button id="log-mood" class="control-btn" style="margin: 0 auto 40px; display: block; padding: 0 24px; width: auto; border-radius: 24px;">
+                    <i class="fas fa-save"></i> Log My Mood
+                </button>
+                
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h3 class="section-heading" style="margin: 0;">CALENDAR</h3>
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" id="prev-month">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="calendar-nav-btn" id="next-month">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="calendar-content">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Application Data
+        const appData = {
+            currentPage: 'home',
+            currentMood: null,
+            currentQuote: 0,
+            currentLevel: 'basic',
+            isPlaying: false,
+            isBreathing: false,
+            currentDate: new Date(),
+            moods: {},
+            // Audio element for actual MP3 playback
+            audioElement: new Audio(),
+            currentTrack: null,
+            currentTrackIndex: 0,
+            // Sample quotes data
+            quotes: [
+                { text: "The greatest glory in living lies not in never falling, but in rising every time we fall.", author: "Nelson Mandela" },
+                { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney" },
+                { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
+                { text: "If life were predictable it would cease to be life, and be without flavor.", author: "Eleanor Roosevelt" },
+                { text: "If you look at what you have in life, you'll always have more.", author: "Oprah Winfrey" },
+                { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" }
+            ],
+            // Breathing patterns
+            breathingPatterns: {
+                basic: { inhale: 4, hold: 4, exhale: 4, name: "4-4-4 Pattern" },
+                moderate: { inhale: 4, hold: 7, exhale: 8, name: "4-7-8 Pattern" },
+                advanced: { inhale: 4, hold: 4, exhale: 4, hold2: 4, name: "Box Breathing" }
+            },
+            // Music playlists - will be populated dynamically
+            music: {
+                happy: [],
+                angry: [],
+                sad: [],
+                relaxing: [],
+                romantic: []
+            }
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved data from localStorage
+            loadSavedData();
+            
+            // Set up navigation
+            setupNavigation();
+            
+            // Set up music player
+            setupMusicPlayer();
+            
+            // Set up quotes
+            setupQuotes();
+            
+            // Set up breathing exercises
+            setupBreathing();
+            
+            // Set up mood tracking
+            setupMoodTracking();
+            
+            // Generate calendar
+            generateCalendar();
+            
+            // Set up home button
+            document.getElementById('home-button').addEventListener('click', () => {
+                showPage('home-page');
+            });
+            
+            // Load music files dynamically
+            loadMusicFiles();
+        });
+
+        // Load music files from the server
+        async function loadMusicFiles() {
+            try {
+                // In a real implementation, you would have a server endpoint
+                // that returns a list of available MP3 files in your music folder
+                // For this example, we'll simulate loading files from a folder
+                
+                // Simulate fetching available music files
+                const musicFiles = await simulateFetchMusicFiles();
+                
+                // Categorize files based on mood (in a real app, this could be based on metadata)
+                categorizeMusicFiles(musicFiles);
+                
+                // Update the UI with the loaded music
+                updateMusicUI();
+                
+            } catch (error) {
+                console.error('Error loading music files:', error);
+                // Fallback to sample music if dynamic loading fails
+                loadSampleMusic();
+            }
+        }
+
+        // Simulate fetching music files from server
+        async function simulateFetchMusicFiles() {
+            // In a real implementation, this would be a fetch call to your server
+            // that returns a list of MP3 files in your music directory
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    // Simulate finding MP3 files in the music folder
+                    // These would be actual file paths to your MP3 files
+                    const musicFiles = [
+                        { name: 'happy_song_1.mp3', path: '/music/happy/happy_song_1.mp3', mood: 'happy', duration: 180 },
+                        { name: 'happy_song_2.mp3', path: '/music/happy/happy_song_2.mp3', mood: 'happy', duration: 210 },
+                        { name: 'angry_song_1.mp3', path: '/music/angry/angry_song_1.mp3', mood: 'angry', duration: 240 },
+                        { name: 'sad_song_1.mp3', path: '/music/sad/sad_song_1.mp3', mood: 'sad', duration: 210 },
+                        { name: 'relaxing_song_1.mp3', path: '/music/relaxing/relaxing_song_1.mp3', mood: 'relaxing', duration: 300 },
+                        { name: 'romantic_song_1.mp3', path: '/music/romantic/romantic_song_1.mp3', mood: 'romantic', duration: 240 }
+                    ];
+                    resolve(musicFiles);
+                }, 500);
+            });
+        }
+
+        // Categorize music files by mood
+        function categorizeMusicFiles(musicFiles) {
+            // Clear existing music data
+            for (const mood in appData.music) {
+                appData.music[mood] = [];
+            }
+            
+            // Categorize files
+            musicFiles.forEach(file => {
+                if (appData.music[file.mood]) {
+                    appData.music[file.mood].push({
+                        title: file.name.replace('.mp3', '').replace(/_/g, ' '),
+                        artist: 'Unknown Artist',
+                        duration: file.duration,
+                        path: file.path
+                    });
+                }
+            });
+        }
+
+        // Fallback to sample music if dynamic loading fails
+        function loadSampleMusic() {
+            appData.music = {
+                happy: [
+                    { title: "Happy Vibes", artist: "Sunny Beats", duration: 180, path: "/music/happy/happy_vibes.mp3" },
+                    { title: "Joyful Journey", artist: "The Optimists", duration: 210, path: "/music/happy/joyful_journey.mp3" }
+                ],
+                angry: [
+                    { title: "Release The Anger", artist: "Catharsis", duration: 240, path: "/music/angry/release_anger.mp3" },
+                    { title: "Calm The Storm", artist: "Serenity Now", duration: 220, path: "/music/angry/calm_storm.mp3" }
+                ],
+                sad: [
+                    { title: "Comfort Zone", artist: "The Empaths", duration: 210, path: "/music/sad/comfort_zone.mp3" },
+                    { title: "Healing Hearts", artist: "Soul Comfort", duration: 225, path: "/music/sad/healing_hearts.mp3" }
+                ],
+                relaxing: [
+                    { title: "Peaceful Mind", artist: "Tranquil Sounds", duration: 300, path: "/music/relaxing/peaceful_mind.mp3" },
+                    { title: "Calm Waters", artist: "Nature's Harmony", duration: 275, path: "/music/relaxing/calm_waters.mp3" }
+                ],
+                romantic: [
+                    { title: "Love Theme", artist: "Heart Strings", duration: 240, path: "/music/romantic/love_theme.mp3" },
+                    { title: "Affection", artist: "The Romantics", duration: 210, path: "/music/romantic/affection.mp3" }
+                ]
+            };
+            
+            updateMusicUI();
+        }
+
+        // Update the music UI with loaded tracks
+        function updateMusicUI() {
+            const playlistElement = document.getElementById('playlist');
+            playlistElement.innerHTML = '';
+            
+            if (appData.currentMood && appData.music[appData.currentMood].length > 0) {
+                appData.music[appData.currentMood].forEach((track, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'playlist-item';
+                    item.dataset.index = index;
+                    item.innerHTML = `
+                        <div>${track.title} - ${track.artist}</div>
+                        <div class="playlist-item-duration">${formatTime(track.duration)}</div>
+                    `;
+                    item.addEventListener('click', () => {
+                        playTrack(index);
+                    });
+                    playlistElement.appendChild(item);
+                });
+                
+                // Play the first track by default
+                playTrack(0);
+            } else {
+                playlistElement.innerHTML = '<div class="text-center">No music found for this mood</div>';
+            }
+        }
+
+        // Play a specific track
+        function playTrack(index) {
+            if (!appData.currentMood || !appData.music[appData.currentMood][index]) return;
+            
+            // Update active track in playlist
+            document.querySelectorAll('.playlist-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`.playlist-item[data-index="${index}"]`).classList.add('active');
+            
+            // Set current track
+            appData.currentTrackIndex = index;
+            appData.currentTrack = appData.music[appData.currentMood][index];
+            
+            // Update UI
+            document.getElementById('now-playing').textContent = 
+                `${appData.currentTrack.title} - ${appData.currentTrack.artist}`;
+            document.getElementById('total-time').textContent = formatTime(appData.currentTrack.duration);
+            
+            // Set up audio element
+            appData.audioElement.src = appData.currentTrack.path;
+            appData.audioElement.load();
+            
+            // Play the track
+            playAudio();
+        }
+
+        // Play the audio
+        function playAudio() {
+            appData.audioElement.play().then(() => {
+                appData.isPlaying = true;
+                document.getElementById('play-pause').innerHTML = '<i class="fas fa-pause"></i>';
+                
+                // Start updating progress
+                updateAudioProgress();
+            }).catch(error => {
+                console.error('Error playing audio:', error);
+                // Fallback to simulated playback if actual audio playback fails
+                simulatePlayback();
+            });
+        }
+
+        // Update audio progress
+        function updateAudioProgress() {
+            const progressBar = document.getElementById('progress');
+            const currentTime = document.getElementById('current-time');
+            
+            // Update progress as audio plays
+            appData.audioElement.ontimeupdate = () => {
+                const percent = (appData.audioElement.currentTime / appData.audioElement.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+                currentTime.textContent = formatTime(appData.audioElement.currentTime);
+            };
+            
+            // Handle when audio ends
+            appData.audioElement.onended = () => {
+                appData.isPlaying = false;
+                document.getElementById('play-pause').innerHTML = '<i class="fas fa-play"></i>';
+                progressBar.style.width = '0%';
+                currentTime.textContent = '0:00';
+                
+                // Play next track if repeat is enabled
+                if (document.getElementById('repeat').classList.contains('active')) {
+                    playNextTrack();
+                }
+            };
+        }
+
+        // Load saved data from localStorage
+        function loadSavedData() {
+            const savedMoods = localStorage.getItem('emoticare_moods');
+            if (savedMoods) {
+                appData.moods = JSON.parse(savedMoods);
+            }
+        }
+
+        // Save moods to localStorage
+        function saveMoods() {
+            localStorage.setItem('emoticare_moods', JSON.stringify(appData.moods));
+        }
+
+        // Set up navigation between pages
+        function setupNavigation() {
+            const navCards = document.querySelectorAll('.nav-card');
+            navCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const pageId = card.getAttribute('data-page') + '-page';
+                    showPage(pageId);
+                });
+            });
+        }
+
+        // Show a specific page
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            
+            // Show the selected page
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Update current page
+            appData.currentPage = pageId.replace('-page', '');
+        }
+
+        // Set up music player functionality
+        function setupMusicPlayer() {
+            const moodOptions = document.querySelectorAll('.mood-option');
+            moodOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove active class from all options
+                    moodOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    option.classList.add('active');
+                    
+                    // Update current mood
+                    appData.currentMood = option.getAttribute('data-mood');
+                    
+                    // Update playlist
+                    updateMusicUI();
+                });
+            });
+            
+            // Set up player controls
+            document.getElementById('play-pause').addEventListener('click', togglePlayPause);
+            document.getElementById('prev').addEventListener('click', playPreviousTrack);
+            document.getElementById('next').addEventListener('click', playNextTrack);
+            document.getElementById('progress-bar').addEventListener('click', seek);
+            document.getElementById('repeat').addEventListener('click', toggleRepeat);
+            document.getElementById('shuffle').addEventListener('click', toggleShuffle);
+        }
+
+        // Toggle play/pause
+        function togglePlayPause() {
+            if (appData.isPlaying) {
+                // Pause playback
+                appData.audioElement.pause();
+                appData.isPlaying = false;
+                document.getElementById('play-pause').innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                // Start playback
+                if (!appData.currentTrack) {
+                    if (appData.currentMood && appData.music[appData.currentMood].length > 0) {
+                        playTrack(0);
+                    } else {
+                        alert('Please select a mood first');
+                    }
+                    return;
+                }
+                playAudio();
+            }
+        }
+
+        // Play previous track
+        function playPreviousTrack() {
+            if (!appData.currentMood || appData.music[appData.currentMood].length === 0) return;
+            
+            let newIndex = appData.currentTrackIndex - 1;
+            if (newIndex < 0) {
+                newIndex = appData.music[appData.currentMood].length - 1;
+            }
+            
+            playTrack(newIndex);
+        }
+
+        // Play next track
+        function playNextTrack() {
+            if (!appData.currentMood || appData.music[appData.currentMood].length === 0) return;
+            
+            let newIndex = appData.currentTrackIndex + 1;
+            if (newIndex >= appData.music[appData.currentMood].length) {
+                newIndex = 0;
+            }
+            
+            playTrack(newIndex);
+        }
+
+        // Toggle repeat
+        function toggleRepeat() {
+            const repeatBtn = document.getElementById('repeat');
+            repeatBtn.classList.toggle('active');
+        }
+
+        // Toggle shuffle
+        function toggleShuffle() {
+            const shuffleBtn = document.getElementById('shuffle');
+            shuffleBtn.classList.toggle('active');
+            
+            // In a real implementation, this would shuffle the playlist
+        }
+
+        // Seek in the audio
+        function seek(e) {
+            if (!appData.currentTrack || !appData.audioElement.duration) return;
+            
+            const progressBar = document.getElementById('progress-bar');
+            const pos = (e.pageX - progressBar.getBoundingClientRect().left) / progressBar.offsetWidth;
+            const seekTime = pos * appData.audioElement.duration;
+            
+            appData.audioElement.currentTime = seekTime;
+        }
+
+        // Format time in minutes:seconds
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Set up quotes functionality
+        function setupQuotes() {
+            // Display first quote
+            displayQuote(appData.currentQuote);
+            
+            // Set up quote navigation
+            document.getElementById('prev-quote').addEventListener('click', () => {
+                appData.currentQuote = (appData.currentQuote - 1 + appData.quotes.length) % appData.quotes.length;
+                displayQuote(appData.currentQuote);
+            });
+            
+            document.getElementById('next-quote').addEventListener('click', () => {
+                appData.currentQuote = (appData.currentQuote + 1) % appData.quotes.length;
+                displayQuote(appData.currentQuote);
+            });
+        }
+
+        // Display a specific quote
+        function displayQuote(index) {
+            document.getElementById('quote-text').textContent = `"${appData.quotes[index].text}"`;
+            document.getElementById('quote-author').textContent = `- ${appData.quotes[index].author}`;
+        }
+
+        // Set up breathing exercises
+        function setupBreathing() {
+            // Set up level selection
+            const levels = document.querySelectorAll('.level');
+            levels.forEach(level => {
+                level.addEventListener('click', () => {
+                    // Remove active class from all levels
+                    levels.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked level
+                    level.classList.add('active');
+                    
+                    // Update current level
+                    appData.currentLevel = level.getAttribute('data-level');
+                    
+                    // Update instruction text
+                    const pattern = appData.breathingPatterns[appData.currentLevel];
+                    document.getElementById('breath-instruction').textContent = 
+                        `Inhale ${pattern.inhale}s - Hold ${pattern.hold}s - Exhale ${pattern.exhale}s`;
+                });
+            });
+            
+            // Set up breathing control
+            document.getElementById('breath-control').addEventListener('click', toggleBreathing);
+        }
+
+        // Toggle breathing exercise
+        function toggleBreathing() {
+            const breathControl = document.getElementById('breath-control');
+            const breathingCircle = document.getElementById('breathing-circle');
+            
+            if (appData.isBreathing) {
+                // Stop breathing exercise
+                appData.isBreathing = false;
+                breathControl.innerHTML = '<i class="fas fa-play"></i>';
+                breathingCircle.style.transform = 'scale(1)';
+                breathingCircle.textContent = 'Breathe In';
+            } else {
+                // Start breathing exercise
+                appData.isBreathing = true;
+                breathControl.innerHTML = '<i class="fas fa-pause"></i>';
+                startBreathingExercise();
+            }
+        }
+
+        // Start breathing exercise
+        function startBreathingExercise() {
+            if (!appData.isBreathing) return;
+            
+            const breathingCircle = document.getElementById('breathing-circle');
+            const pattern = appData.breathingPatterns[appData.currentLevel];
+            
+            // Inhale phase
+            breathingCircle.textContent = 'Breathe In';
+            breathingCircle.style.transform = 'scale(1.5)';
+            breathingCircle.style.backgroundColor = 'var(--sunset-2)';
+            
+            setTimeout(() => {
+                if (!appData.isBreathing) return;
+                
+                // Hold phase
+                breathingCircle.textContent = 'Hold';
+                breathingCircle.style.backgroundColor = 'var(--sunset-1)';
+                
+                setTimeout(() => {
+                    if (!appData.isBreathing) return;
+                    
+                    // Exhale phase
+                    breathingCircle.textContent = 'Breathe Out';
+                    breathingCircle.style.transform = 'scale(1)';
+                    breathingCircle.style.backgroundColor = 'var(--sunset-3)';
+                    
+                    setTimeout(() => {
+                        if (appData.isBreathing) {
+                            // Continue the cycle
+                            startBreathingExercise();
+                        }
+                    }, pattern.exhale * 1000);
+                }, pattern.hold * 1000);
+            }, pattern.inhale * 1000);
+        }
+
+        // Set up mood tracking
+        function setupMoodTracking() {
+            // Set up mood selection
+            const moodEmojis = document.querySelectorAll('.mood-emoji');
+            moodEmojis.forEach(emoji => {
+                emoji.addEventListener('click', () => {
+                    // Remove active class from all emojis
+                    moodEmojis.forEach(e => e.classList.remove('active'));
+                    
+                    // Add active class to clicked emoji
+                    emoji.classList.add('active');
+                    
+                    // Update current mood
+                    appData.currentMood = emoji.getAttribute('data-mood');
+                });
+            });
+            
+            // Set up mood logging
+            document.getElementById('log-mood').addEventListener('click', logMood);
+            
+            // Set up calendar navigation
+            document.getElementById('prev-month').addEventListener('click', () => {
+                appData.currentDate.setMonth(appData.currentDate.getMonth() - 1);
+                generateCalendar();
+            });
+            
+            document.getElementById('next-month').addEventListener('click', () => {
+                appData.currentDate.setMonth(appData.currentDate.getMonth() + 1);
+                generateCalendar();
+            });
+        }
+
+        // Log current mood
+        function logMood() {
+            if (!appData.currentMood) {
+                alert('Please select a mood first');
+                return;
+            }
+            
+            const today = new Date().toDateString();
+            appData.moods[today] = appData.currentMood;
+            
+            saveMoods();
+            generateCalendar();
+            
+            alert(`Mood logged as ${appData.currentMood.toUpperCase()} for today!`);
+        }
+
+        // Generate calendar view as a table
+        function generateCalendar() {
+            const calendarContainer = document.getElementById('calendar-content');
+            const year = appData.currentDate.getFullYear();
+            const month = appData.currentDate.getMonth();
+            
+            // Create calendar header with month and year
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            
+            // Get first day of month and number of days in month
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Create calendar table
+            let calendarHTML = `
+                <h3 style="text-align: center; margin-bottom: 16px;">${monthNames[month]} ${year}</h3>
+                <table class="calendar">
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            let day = 1;
+            for (let i = 0; i < 6; i++) {
+                calendarHTML += '<tr>';
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        calendarHTML += '<td></td>';
+                    } else if (day > daysInMonth) {
+                        calendarHTML += '<td></td>';
+                    } else {
+                        const dateStr = new Date(year, month, day).toDateString();
+                        const mood = appData.moods[dateStr];
+                        
+                        if (mood) {
+                            calendarHTML += `<td class="has-mood mood-${mood}" title="${mood}">${day}</td>`;
+                        } else {
+                            calendarHTML += `<td>${day}</td>`;
+                        }
+                        day++;
+                    }
+                }
+                calendarHTML += '</tr>';
+                
+                if (day > daysInMonth) {
+                    break;
+                }
+            }
+            
+            calendarHTML += '</tbody></table>';
+            calendarContainer.innerHTML = calendarHTML;
+        }
+
+        // Simulate playback for demo purposes (fallback)
+        function simulatePlayback() {
+            if (!appData.isPlaying) return;
+            
+            const progressBar = document.getElementById('progress');
+            const currentTime = document.getElementById('current-time');
+            let progress = 0;
+            const totalTime = appData.currentTrack.duration;
+            
+            // Reset progress
+            progressBar.style.width = '0%';
+            currentTime.textContent = '0:00';
+            
+            const interval = setInterval(() => {
+                if (!appData.isPlaying) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                progress += 1;
+                const percent = (progress / totalTime) * 100;
+                progressBar.style.width = `${percent}%`;
+                currentTime.textContent = formatTime(progress);
+                
+                if (progress >= totalTime) {
+                    clearInterval(interval);
+                    appData.isPlaying = false;
+                    document.getElementById('play-pause').innerHTML = '<i class="fas fa-play"></i>';
+                    progressBar.style.width = '0%';
+                    currentTime.textContent = '0:00';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
